@@ -1,22 +1,23 @@
 package com.alexd.messager;
 
-public class User {
+
+public class UserLoginRequest {
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
-    private String Username;
-    private String Password;
+    private String username;
+    private String password;
 }

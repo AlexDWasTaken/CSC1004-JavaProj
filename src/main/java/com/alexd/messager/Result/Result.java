@@ -18,12 +18,19 @@ public class Result {
 
     private Map<String, Object> data = new HashMap<>();
 
-
     public static Result ok() {
         Result r = new Result();
         r.setSuccess(true);
         r.setCode(ResultCode.SUCCESS);
         r.setMessage("Success");
+        return r;
+    }
+
+    public static Result fail() {
+        Result r = new Result();
+        r.setSuccess(false);
+        r.setCode(ResultCode.FAILURE);
+        r.setMessage("Plain Failure");
         return r;
     }
 
@@ -47,8 +54,9 @@ public class Result {
         return message;
     }
 
-    public void setMessage(String message) {
+    public Result setMessage(String message) {
         this.message = message;
+        return this;
     }
 
     public Result data(String key, Object value) {
