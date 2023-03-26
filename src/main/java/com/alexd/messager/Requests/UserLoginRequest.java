@@ -1,4 +1,4 @@
-package com.alexd.messager;
+package com.alexd.messager.Requests;
 
 
 public class UserLoginRequest {

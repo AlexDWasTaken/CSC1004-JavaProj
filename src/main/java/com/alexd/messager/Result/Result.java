@@ -12,10 +12,6 @@ public class Result {
         return data;
     }
 
-    public void setData(Map<String, Object> data) {
-        this.data = data;
-    }
-
     private Map<String, Object> data = new HashMap<>();
 
     public static Result ok() {
@@ -38,16 +34,18 @@ public class Result {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public Result setSuccess(Boolean success) {
         this.success = success;
+        return this;
     }
 
     public Integer getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public Result setCode(Integer code) {
         this.code = code;
+        return this;
     }
 
     public String getMessage() {

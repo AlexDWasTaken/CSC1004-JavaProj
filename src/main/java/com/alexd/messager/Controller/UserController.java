@@ -3,8 +3,9 @@ package com.alexd.messager.Controller;
 import com.alexd.messager.DAO.UserRepository;
 import com.alexd.messager.DTO.User;
 import com.alexd.messager.JwtUtils;
+import com.alexd.messager.Requests.UserRegisterRequest;
 import com.alexd.messager.Result.Result;
-import com.alexd.messager.UserLoginRequest;
+import com.alexd.messager.Requests.UserLoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    //TODO: Add spring security
     @PostMapping("/login")
     public Result login(@ModelAttribute UserLoginRequest user) {
         Optional<User> optionalUser = userRepository.findByUsername(user.getUsername());
@@ -33,6 +35,21 @@ public class UserController {
         return Result.ok().data("token",token);
     }
 
+    @PostMapping("/register")
+    public Result register(@ModelAttribute UserRegisterRequest user) {
+        Optional<User> optionalUser = userRepository.findByUsername(user.getUsername());
+        if (optionalUser.isPresent()) {
+            return Result.fail().setMessage("User already exists");
+        }
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
+        userRepository.save(newUser);
+        String token = JwtUtils.generateToken(user.getUsername());
+        return Result.ok().data("token", token);
+    }
+
+
     @GetMapping("/resetAdmin")
     public String resetAdmin() {
         Optional<User> optionalUser = userRepository.findByUsername("admin");
@@ -43,6 +60,7 @@ public class UserController {
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword("admin");
+        userRepository.save(admin);
         return "Successfully reset admin";
     }
 }
