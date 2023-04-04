@@ -1,5 +1,6 @@
 package com.alexd.messager;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -20,4 +21,14 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512,secret)
                 .compact();
     }
+
+    public static Claims getClaimsByToken(String token) {
+        String[] tokenParts = token.split(" ");
+        String jwtToken = tokenParts[1];
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(jwtToken)
+                .getBody();
+    }
+
 }
