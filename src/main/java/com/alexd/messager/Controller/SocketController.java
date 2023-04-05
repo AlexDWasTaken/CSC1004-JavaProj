@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class SocketController {
 
-//    @MessageMapping("/message")
-//    @SendTo("/topic/newMessage")
-//    public String sendMessage(String message) {
-//        return message;
-//    }
+    @MessageMapping("/message")
+    @SendTo("/topic/newMessage")
+    public String sendMessage(String message) {
+        return message;
+    }
 
 }
