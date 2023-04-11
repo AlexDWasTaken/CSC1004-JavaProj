@@ -16,5 +16,4 @@ public class SocketController {
     public String sendMessage(String message) {
         return message;
     }
-
 }
