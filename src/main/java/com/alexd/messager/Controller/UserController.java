@@ -17,10 +17,11 @@ import java.util.Optional;
 @CrossOrigin
 public class UserController {
 
+    //Inject the UserRepository
     @Autowired
     private UserRepository userRepository;
 
-    //TODO: Add spring security
+    //Login logic
     @PostMapping("/login")
     public Result login(@ModelAttribute UserLoginRequest user) {
         Optional<User> optionalUser = userRepository.findByUsername(user.getUsername());
@@ -35,6 +36,7 @@ public class UserController {
         return Result.ok().data("token",token);
     }
 
+    //Register logic
     @PostMapping("/register")
     public Result register(@ModelAttribute UserRegisterRequest user) {
         Optional<User> optionalUser = userRepository.findByUsername(user.getUsername());
@@ -49,7 +51,7 @@ public class UserController {
         return Result.ok().data("token", token);
     }
 
-
+    //Force reset admin
     @GetMapping("/resetAdmin")
     public String resetAdmin() {
         Optional<User> optionalUser = userRepository.findByUsername("admin");

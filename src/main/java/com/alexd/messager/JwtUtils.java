@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 
+//Token generator and token parser.
 public class JwtUtils {
     private static long expire = 604800;
     private static String secret = "1145141919810";

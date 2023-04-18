@@ -20,7 +20,7 @@ public class AuthController {
     @CrossOrigin
     @GetMapping("/check-auth")
     public ResponseEntity<?> checkAuth(@RequestHeader(name = "Authorization") String token) {
-        // 验证令牌(token)是否有效，可以使用Spring Security或其他身份验证机制。
+        // Verity token.
         if (isValidToken(token)) {
             return ResponseEntity.ok("{\"authenticated\": true}");
         } else {
@@ -29,10 +29,7 @@ public class AuthController {
     }
 
     private boolean isValidToken(String token) {
-        // 实现令牌(token)验证逻辑，比如使用JWT或者其他验证机制。
-        // 如果验证通过，则返回true，否则返回false。
         String username = JwtUtils.getClaimsByToken(token).getSubject();
-
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isPresent()) {
             return true;

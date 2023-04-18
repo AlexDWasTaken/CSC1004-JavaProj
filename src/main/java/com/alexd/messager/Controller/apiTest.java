@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class apiTest {
 
+    //Test whether the backend application is running successfully.
     @GetMapping("/Test")
     public String Status() {
         return "Success!";

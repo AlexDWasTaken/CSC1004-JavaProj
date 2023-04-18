@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class SocketController {
-
+    //send messages.
     @MessageMapping("/message")
     @SendTo("/topic/newMessage")
     public String sendMessage(String message) {
